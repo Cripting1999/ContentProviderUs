@@ -56,12 +56,18 @@ public class MiProveedorContenido
           switch ( sURIMatcher.match(uri)){
               case 1:
                     if(s1 !=null){
-                       User item =  dao.getAll().get(Integer.parseInt(s1)+1);
+                        for(User item : dao.getAll()){
+                            if(item.uid==Integer.parseInt(s1)){
                                 cursor.newRow().add("uid", item.uid)
                                         .add("first_name", item.firstName)
                                         .add("last_name", item.lastName);
+
                                 Log.d("TABla Usuario", item.uid + " " +  item.firstName
                                         + " " + item.lastName);
+                                break;
+                            }
+
+                        }
                     }else{
                         for(User item : dao.getAll()){
                             cursor.newRow().add("uid", item.uid)
